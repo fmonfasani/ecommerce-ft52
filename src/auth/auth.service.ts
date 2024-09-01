@@ -35,6 +35,7 @@ export class AuthService {
     const payload = {
       id: user.id,
       email: user.email,
+      isAdmin: user.isAdmin,
     };
     // Generación del token
 

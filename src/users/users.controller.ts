@@ -12,15 +12,21 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { AuthGuard } from 'src/auth/auth-guard.guard';
+import { AuthGuard } from 'src/auth/guards/auth-guard.guard';
 import { CreateUserDto } from './user.dto';
+import { Roles } from 'src/decorators/roles.decorator';
+import { Role } from './roles.enum';
+import { RolesGuard } from 'src/auth/guards/roles/roles.guard';
+import { UserResponseDto } from './users.response.dto';
+import { plainToClass } from 'class-transformer';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
   @Get()
-  @UseGuards(AuthGuard)
+  @Roles(Role.Admin)
+  @UseGuards(AuthGuard, RolesGuard)
   getUsers(@Query('page') page: number = 1, @Query('limit') limit: number = 4) {
     return this.userService.getUsers(page, limit);
   }
@@ -28,8 +34,7 @@ export class UsersController {
   @Get(':id')
   @UseGuards(AuthGuard)
   //@UseGuards(AuthGuard)
-  getUser(@Param('id', ParseUUIDPipe) id: string) {
-    console.log(id);
+  async getUser(@Param('id', ParseUUIDPipe) id: string) {
     return this.userService.getUser(id);
   }
 
@@ -39,7 +44,8 @@ export class UsersController {
   // }
 
   @Put(':id')
-  @UseGuards(AuthGuard)
+  @Roles(Role.Admin)
+  @UseGuards(AuthGuard, RolesGuard)
   updateUser(@Param('id', ParseUUIDPipe) id: string, @Body() user) {
     return this.userService.updateUser(id, user);
   }

@@ -63,6 +63,11 @@ export class Users {
   })
   city: string;
 
+  @Column({
+    default: false,
+  })
+  isAdmin: boolean;
+
   @OneToMany(() => Orders, (order) => order.user)
   orders: Orders[];
 }

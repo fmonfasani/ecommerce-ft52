@@ -9,7 +9,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
-import { AuthGuard } from 'src/auth/auth-guard.guard';
+import { AuthGuard } from 'src/auth/guards/auth-guard.guard';
 
 @Controller('products')
 export class ProductsController {

@@ -1,9 +1,11 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
 import { OrdersService } from './orders.service';
 import { CreateOrderDto } from './order.dto';
+import { AuthGuard } from 'src/auth/auth-guard.guard';
 
 @Controller('orders')
+@UseGuards(AuthGuard)
 export class OrdersController {
   constructor(private readonly orderService: OrdersService) {}
 

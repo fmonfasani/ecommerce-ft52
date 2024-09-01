@@ -7,7 +7,8 @@ import { Users } from 'src/entities/users.entity';
 @Injectable()
 export class UserRepository {
   constructor(
-    @InjectRepository(Users) private usersRepository: Repository<Users>,
+    @InjectRepository(Users)
+    private readonly usersRepository: Repository<Users>,
   ) {}
 
   async getUsers(page: number, limit: number) {
@@ -30,9 +31,13 @@ export class UserRepository {
     return userNoPassword;
   }
 
-  async createUser(user: Users): Promise<Partial<Users>> {
+  async createUser(user: Partial<Users>): Promise<Partial<Users>> {
     const newUser = await this.usersRepository.save(user);
-    const { password, ...userNoPassword } = newUser;
+
+    const dbUser = await this.usersRepository.findOneBy({ id: newUser.id });
+    console.log(dbUser);
+
+    const { password, ...userNoPassword } = dbUser;
     return userNoPassword;
   }
 

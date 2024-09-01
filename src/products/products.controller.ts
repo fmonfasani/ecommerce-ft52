@@ -1,6 +1,15 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Get, Param, Put, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Put,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { ProductsService } from './products.service';
+import { AuthGuard } from 'src/auth/auth-guard.guard';
 
 @Controller('products')
 export class ProductsController {
@@ -25,6 +34,7 @@ export class ProductsController {
   }
 
   @Put(':id')
+  @UseGuards(AuthGuard)
   updateProduct(@Param('id') id: string, @Body() product) {
     return this.productsService.updateProduct(id, product);
   }

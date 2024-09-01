@@ -26,16 +26,17 @@ export class UsersController {
   }
 
   @Get(':id')
+  @UseGuards(AuthGuard)
   //@UseGuards(AuthGuard)
   getUser(@Param('id', ParseUUIDPipe) id: string) {
     console.log(id);
     return this.userService.getUser(id);
   }
 
-  @Post()
-  createUser(@Body() user: CreateUserDto) {
-    return this.userService.createUser(user);
-  }
+  // @Post()
+  // createUser(@Body() user: CreateUserDto) {
+  //   return this.userService.createUser(user);
+  // }
 
   @Put(':id')
   @UseGuards(AuthGuard)

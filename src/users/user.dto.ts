@@ -7,7 +7,9 @@ import {
   Matches,
   IsEmail,
   IsNumber,
+  Validate,
 } from 'class-validator';
+import { MatchPassword } from 'src/decorators/matchPassword.decorator';
 
 export class CreateUserDto {
   @IsNotEmpty()
@@ -29,6 +31,10 @@ export class CreateUserDto {
   @MinLength(8)
   @MaxLength(15)
   password: string;
+
+  @IsNotEmpty()
+  @Validate(MatchPassword, ['password'])
+  confirmPassword: string;
 
   @IsNotEmpty()
   @IsString()

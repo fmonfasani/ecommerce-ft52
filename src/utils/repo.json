@@ -1,0 +1,98 @@
+[
+  {
+    "name": "Iphone 15",
+    "description": "The best smartphone in the world",
+    "price": 199.99,
+    "stock": 12,
+    "category": "smartphone",
+    "imgUrl": "https://st5.depositphotos.com/9169320/64568/i/1600/depositphotos_645689096-stock-photo-tarragona-spain-march-2022-back.jpg"
+  },
+  {
+    "name": "Samsung Galaxy S23",
+    "description": "The best smartphone in the world",
+    "price": 150.0,
+    "stock": 12,
+    "category": "smartphone",
+    "imgUrl": "https://st3.depositphotos.com/6126966/12682/i/950/depositphotos_126822116-stock-photo-modern-smart-phone-on-white.jpg"
+  },
+  {
+    "name": "Motorola Edge 40",
+    "description": "The best smartphone in the world",
+    "price": 179.89,
+    "stock": 12,
+    "category": "smartphone",
+    "imgUrl": "https://st2.depositphotos.com/27201292/50282/i/1600/depositphotos_502823808-stock-photo-closeup-shot-telephone-white-background.jpg"
+  },
+  {
+    "name": "Samsung Odyssey G9",
+    "description": "The best monitor in the world",
+    "price": 299.99,
+    "stock": 12,
+    "category": "monitor",
+    "imgUrl": "https://st4.depositphotos.com/23609278/24920/i/1600/depositphotos_249209456-stock-photo-curved-screen-isolated-soft-gray.jpg"
+  },
+  {
+    "name": "LG UltraGear",
+    "description": "The best monitor in the world",
+    "price": 199.99,
+    "stock": 12,
+    "category": "monitor",
+    "imgUrl": "https://st4.depositphotos.com/1031343/27136/i/450/depositphotos_271361308-stock-photo-monitor-blank-screen-with-clipping.jpg"
+  },
+  {
+    "name": "Acer Predator",
+    "description": "The best monitor in the world",
+    "price": 150.8,
+    "stock": 12,
+    "category": "monitor",
+    "imgUrl": "https://st3.depositphotos.com/6023338/13833/v/1600/depositphotos_138331326-stock-illustration-curved-screen-smart-tv.jpg"
+  },
+  {
+    "name": "Razer BlackWidow V3",
+    "description": "The best keyboard in the world",
+    "price": 99.99,
+    "stock": 12,
+    "category": "keyboard",
+    "imgUrl": "https://st4.depositphotos.com/15827116/24285/i/1600/depositphotos_242859180-stock-photo-partial-view-woman-typing-keyboard.jpg"
+  },
+  {
+    "name": "Corsair K70",
+    "description": "The best keyboard in the world",
+    "price": 79.99,
+    "stock": 12,
+    "category": "keyboard",
+    "imgUrl": "https://st4.depositphotos.com/9335500/24088/i/1600/depositphotos_240885676-stock-photo-closeup-of-female-hands-typing.jpg"
+  },
+  {
+    "name": "Logitech G Pro",
+    "description": "The best keyboard in the world",
+    "price": 59.99,
+    "stock": 12,
+    "category": "keyboard",
+    "imgUrl": "https://st4.depositphotos.com/15827116/24285/i/1600/depositphotos_242859172-stock-photo-cropped-view-woman-typing-keyboard.jpg"
+  },
+  {
+    "name": "Razer Viper",
+    "description": "The best mouse in the world",
+    "price": 49.99,
+    "stock": 12,
+    "category": "mouse",
+    "imgUrl": "https://st.depositphotos.com/2208320/2018/v/950/depositphotos_20182763-stock-illustration-computer-mouse-vector-design.jpg"
+  },
+  {
+    "name": "Logitech G502 Pro",
+    "description": "The best mouse in the world",
+    "price": 39.99,
+    "stock": 12,
+    "category": "mouse",
+    "imgUrl": "https://st.depositphotos.com/8752776/56671/i/1600/depositphotos_566716788-stock-photo-modern-wireless-gaming-computer-mouse.jpg"
+  },
+  {
+    "name": "SteelSeries Rival 3",
+    "description": "The best mouse in the world",
+    "price": 29.99,
+    "stock": 12,
+    "category": "mouse",
+    "imgUrl": "https://st2.depositphotos.com/8752776/47557/i/1600/depositphotos_475576004-stock-photo-modern-wireless-gaming-computer-mouse.jpg"
+  }
+]

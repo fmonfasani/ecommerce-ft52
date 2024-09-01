@@ -1,49 +1,68 @@
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
-//Definición de la Interfaz Product
-export interface Product {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  stock: number;
-  imgUrl: string;
-}
+import { InjectRepository } from '@nestjs/typeorm';
+import { Categories } from 'src/entities/categories.entity';
+import { Products } from 'src/entities/products.entity';
+import { Repository } from 'typeorm';
+import * as data from '../utils/repo.json';
 
-// creacion del Repositorio de Productos
+@Injectable()
+export class ProductsRepository {
+  constructor(
+    @InjectRepository(Products)
+    private productsRepository: Repository<Products>,
+    @InjectRepository(Categories)
+    private categoriesRepository: Repository<Categories>,
+  ) {}
 
-@Injectable() // Decorador que marca la clase ProductRepository como un proveedor en NestJS,
-// lo que significa que puede ser inyectado en otras  clases a través del sistema de inyección de dependencias de NestJS.
-export class ProductRepository {
-  //Clase que actúa como un repositorio para tus productos, almacenando y recuperando productos.
-  private products = [
-    //Un array simulado de productos que actúa como una base de datos en memoria.
-    {
-      id: 1,
-      name: 'Product 1',
-      description: 'Description 1',
-      price: 10,
-      stock: 10,
-      imgUrl: 'https://via.placeholder.com/150',
-    },
-    {
-      id: 2,
-      name: 'Product 2',
-      description: 'Description 2',
-      price: 20,
-      stock: 20,
-      imgUrl: 'https://via.placeholder.com/150',
-    },
-    {
-      id: 3,
-      name: 'Product 3',
-      description: 'Description 3',
-      price: 30,
-      stock: 30,
-      imgUrl: 'https://via.placeholder.com/150',
-    }, // Esta es la llave que cierra la lista de products
-  ];
+  async getProducts(page: number, limit: number): Promise<Products[]> {
+    let products = await this.productsRepository.find({
+      relations: {
+        category: true,
+      },
+    });
+    const start = (page - 1) * limit;
+    const end = start + limit;
+    products = products.slice(start, end);
 
-  getproducts() {
-    return this.products; //Método que devuelve la lista de productos.
+    return products;
+  }
+
+  async getProduct(id: string) {
+    const product = await this.productsRepository.findOneBy({ id });
+    product ? product : `Producto con id ${id} no encontrado`;
+  }
+
+  async addProducts() {
+    const categories = await this.categoriesRepository.find();
+
+    data?.map(async (element) => {
+      const category = categories.find(
+        (category) => category.name === element.category,
+      );
+      const product = new Products();
+      product.name = element.name;
+      product.description = element.description;
+      product.price = element.price;
+      product.imgUrl = element.imgUrl;
+      product.stock = element.stock;
+      product.category = category;
+
+      await this.productsRepository
+        .createQueryBuilder()
+        .insert()
+        .into(Products)
+        .values(product)
+        .orUpdate(['description', 'price', 'imgUrl', 'stock'], ['name'])
+        .execute();
+    });
+
+    return 'Productos agregados';
+  }
+
+  async updateProduct(id: string, product: Products) {
+    await this.productsRepository.update(id, product);
+    const updatedProduct = await this.productsRepository.findOneBy({ id });
+    return updatedProduct;
   }
 }

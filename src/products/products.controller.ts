@@ -1,20 +1,31 @@
-import { Controller, Get } from '@nestjs/common';
-//Este paquete contiene decoradores y funcionalidades básicas de NestJS.
-// Controller: Es un decorador que marca una clase como un controlador, que puede manejar solicitudes HTTP
-// Get: Es un decorador que define un método HTTP GET en la ruta definida en el controlador.
+/* eslint-disable prettier/prettier */
+import { Body, Controller, Get, Param, Put, Query } from '@nestjs/common';
 import { ProductsService } from './products.service';
-// Servicio que utiliza ProductRepository para obtener los productos.
-import { Product } from './products.repository';
-// Un array simulado de productos que actúa como una base de datos en memoria.
 
 @Controller('products')
-//Decorador que marca la clase como un controlador con la ruta base products.
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
-  // Inyecta ProductsService para acceder a la lógica de negocio.
-  @Get() //Decorador de método que crea un manejador de rutas HTTP GET en la ruta definida en el controlador.
-  getProducts(): Product[] {
-    //Método que utiliza ProductsService para obtener y retornar los productos.
-    return this.productsService.getProducts();
+
+  @Get()
+  getProducts(
+    @Query('page') page: number = 1,
+    @Query('limit') limit: number = 6,
+  ) {
+    if (page && limit) return this.productsService.getProducts(page, limit);
+    return this.productsService.getProducts(page, limit);
+  }
+  @Get('seeder')
+  addProducts() {
+    return this.productsService.addProducts();
+  }
+
+  @Get(':id')
+  getProduct(@Param('id') id: string) {
+    return this.productsService.getProduct(id);
+  }
+
+  @Put(':id')
+  updateProduct(@Param('id') id: string, @Body() product) {
+    return this.productsService.updateProduct(id, product);
   }
 }

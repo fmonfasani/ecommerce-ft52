@@ -1,5 +1,4 @@
 
-<a href="https://paypal.me/fmonfasani?country.x=AR&locale.x=es_XC" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>   
 <a href="https://www.linkedin.com/in/fmonfasani/" target="_blank"><img src="https://img.shields.io/badge/LinkedIn-Federico_Monfasani-blue.svg" alt="LinkedIn Profile" /></a>
 <a href="https://www.instagram.com/fmonfasani/" target="_blank"><img src="https://img.shields.io/badge/Instagram-fmonfasani-orange.svg" alt="Instagram Profile" /></a>
 <a href="https://x.com/fmonfasani" target="_blank"><img src="https://img.shields.io/badge/X-fmonfasani-brightgreen.svg" alt="X Profile" /></a>
@@ -8,7 +7,7 @@
 <a href="https://gitlab.com/fmonfasani" target="_blank"><img src="https://img.shields.io/badge/GitLab-fmonfasani-blue.svg" alt="GitLab Profile" /></a>
 <a href="https://twitter.com/fmonfasani" target="_blank"><img src="https://img.shields.io/twitter/follow/fmonfasani.svg?style=social&label=Follow" alt="Twitter Follow" /></a>
 <a href="https://discord.gg/fmonfasani" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
+<a href="https://paypal.me/fmonfasani?country.x=AR&locale.x=es_XC" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>  
 <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
 
 

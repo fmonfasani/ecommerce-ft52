@@ -1,0 +1,39 @@
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ecommerce_app
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: 1234
+      DB_NAME: ecommerce_db_ft52
+      CLOUDINARY_CLOUD_NAME: ddc5jpwq7
+      CLOUDINARY_API_KEY: 788699913423744
+      CLOUDINARY_API_SECRET: Y8ueAIdYL6wpw6px8tmp1t85Xak
+      JWT_SECRET: EstaEsLaClaveSuperSecreta
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+  db:
+    image: postgres:14-alpine
+    container_name: ecommerce_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: ecommerce_db_ft52
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

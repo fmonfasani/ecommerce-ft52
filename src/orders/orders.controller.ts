@@ -3,7 +3,9 @@ import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
 import { OrdersService } from './orders.service';
 import { CreateOrderDto } from './order.dto';
 import { AuthGuard } from 'src/auth/guards/auth-guard.guard';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('orders')
 @Controller('orders')
 @UseGuards(AuthGuard)
 export class OrdersController {

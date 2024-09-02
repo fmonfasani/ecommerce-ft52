@@ -6,7 +6,8 @@
 <a href="https://github.com/fmonfasani" target="_blank"><img src="https://img.shields.io/github/followers/fmonfasani?label=Follow&style=social" alt="GitHub Followers" /></a>
 <a href="https://gitlab.com/fmonfasani" target="_blank"><img src="https://img.shields.io/badge/GitLab-fmonfasani-blue.svg" alt="GitLab Profile" /></a><a href="https://twitter.com/fmonfasani" target="_blank"><img src="https://img.shields.io/twitter/follow/fmonfasani.svg?style=social&label=Follow" alt="Twitter Follow" /></a><a href="https://discord.gg/fmonfasani" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a><a href="https://paypal.me/fmonfasani?country.x=AR&locale.x=es_XC" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a><a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
 
-
+- Author - Federico Monfasani
+- Twitter - [@fmonfasani](https://twitter.com/fmonfasani) 
 
 
 # Explicación del Backend para un Carrito de Compras en E-commerce

@@ -30,12 +30,8 @@ export class Categories {
   })
   name: string;
 
-  /**
-   * Lista de productos asociados a esta categoría.
-   * Relación uno a muchos con la entidad `Products`.
-   * @example [{ "id": "1", "name": "Smartphone" }, { "id": "2", "name": "Laptop" }]
-   */
-  @OneToMany(() => Products, (product) => product.category)
+ 
+  @OneToMany(() => Products, (product) => product.category, { lazy: true })
   @JoinColumn()
   products: Products[];
 }

@@ -3,29 +3,22 @@ import { ArrayMinSize, IsArray, IsNotEmpty, IsUUID } from 'class-validator';
 import { Products } from 'src/entities/products.entity';
 
 export class CreateOrderDto {
-  /**
-   * El ID del usuario que realiza la orden.
-   * Debe ser un UUID válido.
-   * @example "d290f1ee-6c54-4b01-90e6-d701748f0851"
-   */
+  
   @ApiProperty({
-    description:
-      'El ID del usuario que realiza la orden. Debe ser un UUID válido.',
-    example: '8d261eb5-4f22-4b9c-b78a-549025b9b480',
-  })
+    description: 'El ID del usuario que realiza la orden',
+    example: 'b7520538-ff0b-4e76-92a2-c67f9d914f97',  
+
+  })  
   @IsNotEmpty()
   @IsUUID()
   userId: string;
-
+  
   @ApiProperty({
-    description:
-      'Lista de productos que forman parte de la orden. Debe ser un array que contenga al menos un producto.',
-    example: [
-      { id: '8545042a-75da-4764-a55a-4d33a939c59d' },
-      { id: '8545042a-75da-4764-a55a-4d33a939c59d' },
-    ],
-    type: [Products],
-  })
+    description: 'El array d elos productos deben ser de la forma {id, product_id}',
+    example: [{id:'0a88d195-199d-440a-a840-bf576a5a7d7d'}, {id:'29af298f-67df-4d6a-be2d-6e9c26145b8c'}]
+
+  })  
+
   @IsArray()
   @ArrayMinSize(1)
   products: Partial<Products>[];

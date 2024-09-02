@@ -88,17 +88,18 @@ export class Products {
    * Indica a qué categoría pertenece el producto.
    * @example { "id": "1", "name": "Electronics" }
    */
-  @ManyToOne(() => Categories, (category) => category.products)
+  @ManyToOne(() => Categories, (category) => category.products, { lazy: true })
   @JoinColumn({ name: 'category_id' })
   @ApiHideProperty()
   category: Categories;
+
 
   /**
    * Relación muchos a muchos con la entidad `OrderDetails`.
    * Indica en qué detalles de pedidos se encuentra este producto.
    * @example [ { "id": "1", "price": 1299.99 }, { "id": "2", "price": 799.99 } ]
    */
-  @ManyToMany(() => OrderDetails, (orderDetail) => orderDetail.products)
+  @ManyToMany(() => OrderDetails, (orderDetail) => orderDetail.products, { lazy: true })
   @ApiHideProperty()
   orderDetails: OrderDetails[];
 }

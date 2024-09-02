@@ -42,7 +42,7 @@ export class OrderDetails {
    * Indica a qué pedido pertenecen estos detalles.
    * @example { "id": "1", "total": 299.99, "status": "completed" }
    */
-  @OneToOne(() => Orders, (order) => order.orderDetails)
+  @OneToOne(() => Orders, (order) => order.orderDetails, { lazy: true })
   @JoinColumn({ name: 'order_id' })
   @ApiHideProperty()
   order: Orders;
@@ -52,7 +52,7 @@ export class OrderDetails {
    * Relación muchos a muchos con la entidad `Products`.
    * @example [{ "id": "1", "name": "Smartphone" }, { "id": "2", "name": "Laptop" }]
    */
-  @ManyToMany(() => Products, (product) => product.orderDetails)
+  @ManyToMany(() => Products, (product) => product.orderDetails, { lazy: true })
   @JoinTable({
     name: 'orderdetails_products', // Nombre de la tabla de unión
     joinColumn: {

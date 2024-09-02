@@ -19,7 +19,7 @@
   import { RolesGuard } from 'src/auth/guards/roles/roles.guard';
   import { UserResponseDto } from './users.response.dto';
   import { plainToClass } from 'class-transformer';
-  import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+  import { ApiBearerAuth, ApiTags, ApiProperty } from '@nestjs/swagger';
 
   @ApiTags('users')
   @Controller('users')
@@ -33,19 +33,17 @@
     getUsers(@Query('page') page: number = 1, @Query('limit') limit: number = 4) {
       return this.userService.getUsers(page, limit);
     }
-
+    @ApiProperty({      
+      description: 'The id of the user',
+      example: 'b7520538-ff0b-4e76-92a2-c67f9d914f97'
+    })
     @Get(':id')
     @UseGuards(AuthGuard)
-    //@UseGuards(AuthGuard)
     async getUser(@Param('id', ParseUUIDPipe) id: string) {
-      return this.userService.getUser(id);
+    return this.userService.getUser(id);
     }
 
-    // @Post()
-    // createUser(@Body() user: CreateUserDto) {
-    //   return this.userService.createUser(user);
-    // }
-
+    
     @Put(':id')
     @Roles(Role.Admin)
     @UseGuards(AuthGuard, RolesGuard)

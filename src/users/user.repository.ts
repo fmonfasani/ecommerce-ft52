@@ -4,31 +4,35 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Users } from 'src/entities/users.entity';
 
-@Injectable()
+@Injectable() //Marca la clase para inyección de dependencias.
 export class UserRepository {
   constructor(
-    @InjectRepository(Users)
-    private readonly usersRepository: Repository<Users>,
+    @InjectRepository(Users) //Inyecta el repositorio de Users.
+    private readonly usersRepository: Repository<Users>, //este respo permite usar Users, y lo guardamos en usersRepository
   ) {}
 
   async getUsers(page: number, limit: number) {
-    const skip = (page - 1) * limit;
+    //creamos la paginacion
+    const skip = (page - 1) * limit; //calculamos la paginacion
     const users = await this.usersRepository.find({
-      take: limit,
-      skip: skip,
+      //buscamos los usuarios
+      take: limit, //limitamos la paginacion
+      skip: skip, //desde donde empieza la paginacion
     });
-    return users.map(({ password, ...userNoPassword }) => userNoPassword);
+    return users.map(({ password, ...userNoPassword }) => userNoPassword); //retornamos la paginacion
   }
 
   async getUser(id: string) {
+    //buscamos el usuario por id
     const user = await this.usersRepository.findOne({
-      where: { id },
-      relations: { orders: true },
+      //buscamos el usuario
+      where: { id }, //buscamos el usuario por id
+      relations: { orders: true }, //buscamos el usuario con sus ordenes
     });
-    if (!user) return `No se encontró el usuario con id ${id}`;
-    const { password, ...userNoPassword } = user;
+    if (!user) return `No se encontró el usuario con id ${id}`; //si no lo encontramos retornamos un error
+    const { password, ...userNoPassword } = user; //si lo encontramos retornamos el usuario sin la password
 
-    return userNoPassword;
+    return userNoPassword; //retornamos el usuario sin la password
   }
 
   async createUser(user: Partial<Users>): Promise<Partial<Users>> {

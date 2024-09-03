@@ -25,7 +25,7 @@ export class CreateUserDto {
 
   @ApiProperty({
     description: 'El correo electrónico del usuario. Debe ser un email válido.',
-    example: 'testuser@example.com',
+    example: 'testuser02@example.com',
   })
   @IsNotEmpty()
   @IsEmail()

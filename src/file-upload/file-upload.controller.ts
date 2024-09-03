@@ -13,14 +13,28 @@ import {
 import { FileUploadService } from './file-upload.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { AuthGuard } from 'src/auth/guards/auth-guard.guard';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiTags, ApiConsumes, ApiBody, ApiBearerAuth } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 @ApiTags('files')
 @Controller('files')
-@UseGuards(AuthGuard)
+@UseGuards(JwtAuthGuard) // Aquí usamos JwtAuthGuard para proteger el endpoint
+@ApiBearerAuth() // Esto le indica a Swagger que este endpoint requiere autenticación JWT
 export class FileUploadController {
   constructor(private readonly fileUploadService: FileUploadService) {}
   @Post('uploadImage/:id')
   @UseInterceptors(FileInterceptor('file'))
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        file: {
+          type: 'string',
+          format: 'binary',
+        },
+      },
+    },
+  })
   uploadImage(
     @Param('id') productId: string,
     @UploadedFile(

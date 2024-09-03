@@ -10,10 +10,11 @@ import {
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { AuthGuard } from 'src/auth/guards/auth-guard.guard';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
 import { RolesGuard } from 'src/auth/guards/roles/roles.guard';
 import { Role } from 'src/users/roles.enum';
 import { Roles } from 'src/decorators/roles.decorator';
+
 @ApiTags('products')
 @Controller('products')
 export class ProductsController {
@@ -24,9 +25,9 @@ export class ProductsController {
     @Query('page') page: number = 1,
     @Query('limit') limit: number = 6,
   ) {
-    if (page && limit) return this.productsService.getProducts(page, limit);
     return this.productsService.getProducts(page, limit);
   }
+
   @Get('seeder')
   addProducts() {
     return this.productsService.addProducts();
@@ -37,11 +38,24 @@ export class ProductsController {
     return this.productsService.getProduct(id);
   }
 
-  @Put(':id')
+  @Put(':id/stock')
   @ApiBearerAuth()
   @Roles(Role.Admin)
   @UseGuards(AuthGuard, RolesGuard)
-  updateProduct(@Param('id') id: string, @Body() product) {
-    return this.productsService.updateProduct(id, product);
+  @ApiParam({
+    name: 'id',
+    type: 'string',
+    description: 'Product ID',
+    format: 'uuid',
+  })
+  @ApiBody({
+    schema: {
+      properties: {
+        stock: { type: 'integer', description: 'Quantity of stock to update' },
+      },
+    },
+  })
+  updateProductStock(@Param('id') id: string, @Body('stock') stock: number) {
+    return this.productsService.updateProductStock(id, stock);
   }
 }

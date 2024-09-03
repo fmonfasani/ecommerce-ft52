@@ -2,17 +2,18 @@
 import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
 import { OrdersService } from './orders.service';
 import { CreateOrderDto } from './order.dto';
-import { AuthGuard } from 'src/auth/guards/auth-guard.guard';
-import { ApiTags} from '@nestjs/swagger';
+//import { AuthGuard } from 'src/auth/guards/auth-guard.guard';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 @ApiTags('orders')
 @Controller('orders')
-@UseGuards(AuthGuard)
+@ApiBearerAuth()
+@UseGuards(JwtAuthGuard)
 export class OrdersController {
   constructor(private readonly orderService: OrdersService) {}
 
   @Post()
-  
   addOrder(@Body() order: CreateOrderDto) {
     const { userId, products } = order;
     console.log('User ID:', order.userId); // Debería imprimir el userId
@@ -25,4 +26,3 @@ export class OrdersController {
     return this.orderService.getOrder(id);
   }
 }
-

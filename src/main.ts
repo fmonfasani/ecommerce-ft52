@@ -16,7 +16,7 @@ async function bootstrap() {
     .setDescription(
       'Projecto Integrador de la especialidad de Backend con NestJs',
     )
-    .setVersion('1.0.0')
+    .setVersion('1.1.0')
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, options);

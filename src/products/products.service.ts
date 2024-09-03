@@ -9,6 +9,7 @@ export class ProductsService {
   getProducts(page: number, limit: number) {
     return this.productRepository.getProducts(page, limit);
   }
+
   getProduct(id: string) {
     return this.productRepository.getProduct(id);
   }
@@ -16,7 +17,8 @@ export class ProductsService {
   addProducts() {
     return this.productRepository.addProducts();
   }
-  updateProduct(id: string, product) {
-    return this.productRepository.updateProduct(id, product);
+
+  updateProductStock(id: string, stock: number) {
+    return this.productRepository.updateProductStock(id, stock);
   }
 }

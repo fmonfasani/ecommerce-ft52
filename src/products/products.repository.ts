@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Categories } from 'src/entities/categories.entity';
 import { Products } from 'src/entities/products.entity';
@@ -28,9 +28,12 @@ export class ProductsRepository {
     return products;
   }
 
-  async getProduct(id: string) {
-    const product = await this.productsRepository.findOneBy({ id });
-    product ? product : `Producto con id ${id} no encontrado`;
+  async getProduct(id: string): Promise<Products> {
+    const product = await this.productsRepository.findOne({ where: { id } });
+    if (!product) {
+      throw new NotFoundException(`Product with id ${id} not found`);
+    }
+    return product;
   }
 
   async addProducts() {
@@ -60,9 +63,20 @@ export class ProductsRepository {
     return 'Productos agregados';
   }
 
-  async updateProduct(id: string, product: Products) {
-    await this.productsRepository.update(id, product);
-    const updatedProduct = await this.productsRepository.findOneBy({ id });
-    return updatedProduct;
+  async updateProductStock(id: string, stock: number): Promise<Products> {
+    // Encuentra el producto por su ID
+    const product = await this.productsRepository.findOne({ where: { id } });
+    if (!product) {
+      throw new NotFoundException(`Product with id ${id} not found`);
+    }
+
+    // Actualiza solo el campo 'stock'
+    product.stock = stock;
+
+    // Guarda los cambios en la base de datos
+    await this.productsRepository.save(product);
+
+    // Devuelve el producto completo con todos los campos
+    return product;
   }
 }
